@@ -8,7 +8,7 @@ render_with_liquid: false
 img_path: /assets/img/2023-03-22/
 ---
 
-In this article I would like to introduce you to a tool / template I created, which can be used to phis credentials and even handle MFA. This work is heavily based on the initial article of [mrd0x](https://mrd0x.com/bypass-2fa-using-novnc/).
+In this article I would like to introduce you to a tool / template I created, which can be used to phish credentials and even handle MFA. This work is heavily based on the initial article of [mrd0x](https://mrd0x.com/bypass-2fa-using-novnc/).
 
 ## Basic Concept
 
@@ -19,7 +19,7 @@ So, we all know and love phishing. From my experience there are two kinds of phi
 
 Both scenarios come with their own problems and possible solutions - in this article we focus on the phishing for credentials. So when it comes to this kind of attack the main enemy (or best defense) is `Multi-Factor-Authentication`. Even when an attacker gains access to valid credentials, a logon without this factor is not possible. Therefore, this attack vector is highly depended on the site, which should be phished and the individual user setup - which negatively impacts the success rate of such an attack.
 
-That is until the article of [mrd0x](https://mrd0x.com/bypass-2fa-using-novnc/) changed the perspective on this topic - the basic idea is to lure the user to click a link, which connects to a machine where the desktop is presented within the browser, by use of `noVNC`. But instead of a regular desktop the attacker presents a fullscreen browser with the real target website. The big advantage of this technique is that the attacker has full control over the machine (with the VNC connection) and therefore has full control over the browser and sessions within it. When the user now logs on the real website - the attacker gains access to all relevant session information, which are required to impersonate the user. An additional advantage, from an attacker perspective, is that the real website is shown. This means the user interacts with the real target website and therefore the user experience for the victim is nearly the same.
+That is until the article of [mrd0x](https://mrd0x.com/bypass-2fa-using-novnc/) changed the perspective on this topic - the basic idea is to lure the user to click a link, which connects to a machine where the desktop is presented within the browser, by use of `noVNC`. But instead of a regular desktop the attacker presents a fullscreen browser with the real target website. The big advantage of this technique is that the attacker has full control over the machine (with the vnc connection) and therefore has full control over the browser and sessions within it. When the user now logs on the real website - the attacker gains access to all relevant session information, which are required to impersonate the user. An additional advantage, from an attacker perspective, is that the real website is shown. This means the user interacts with the real target website and therefore the user experience for the victim is nearly the same.
 
 This was just a short overview so please read the full article of [mrd0x](https://mrd0x.com/bypass-2fa-using-novnc/) to get more details.
 
@@ -31,11 +31,11 @@ With this concept established let's see what a noob as I can add to that. The ba
 
 ![Make it easy!](easy.jpg)
 
-## How to make it scaleable?
+## How to make it scalable?
 
 So with the basic concept established maybe you see already a little issue - a vnc session means that the user controls the provided machine. If you now send the same link to two different users, they both connect to the same machine and therefore see each other’s actions (or fight over the control of the mouse). This situation (although funny) will be very awkward and should be avoided. Therefore, a requirement for our setup is that each user, which we want to phis, requires a separate vnc session.
 
-To accomplish this we could start as many vnc sessions on our phishing host as we want - than we require a little bit of power under the hood (so no ec2 small :( ). Next and an additional disadvantage is that we need to open the corresponding VNC port for each session - this can be a little overhead. Ideally, we want just one url, which then redirects to the separate vnc sessions and makes the network setup very simple - just open port 80 / 443.
+To accomplish this we could start as many vnc sessions on our phishing host as we want - than we require a little bit of power under the hood (so no ec2 small :( ). Next and an additional disadvantage is that we need to open the corresponding vnc port for each session - this can be a little overhead. Ideally, we want just one url, which then redirects to the separate vnc sessions and makes the network setup very simple - just open port 80 / 443.
 
 Before we cover this distribution problem, we may focus on our initial problem one user one vnc machine - and keep it small (and ideally cheap). Let's talk about docker.
 
@@ -52,9 +52,9 @@ My personal experience with docker was zero - so after a lot of reading, trial a
 The base docker image is [accetto/ubuntu-vnc-xfce-firefox-g3](https://hub.docker.com/r/accetto/ubuntu-vnc-xfce-firefox-g3) - there we adjust a few things:
 
 Adjustments to noVNC:
-- Within the vnc.html file the same adjustments were made as [fhlipzero](https://fhlipzero.io/blogs/6_noVNC/noVNC.html) and [mrd0x](https://mrd0x.com/bypass-2fa-using-novnc/) suggested - to ensure no controls are shown and the transition to the vnc connection is blank
+- Within the vnc.html file the same adjustments were made as [fhlipzero](https://fhlipzero.io/blogs/6_noVNC/noVNC.html) and [mrd0x](https://mrd0x.com/bypass-2fa-using-noVNC/) suggested - to ensure no controls are shown and the transition to the vnc connection is blank
 - Renaming of the adjusted vnc.html to conn.html (to not be suspicious)
-- Within the ui.js the page title was changed to ensure it does not look to phisy
+- Within the ui.js the page title was changed to ensure it does not look to phishy
 
 Adjustments to the container:
 - Adjust the xfce4 config to ensure just a blank white screen is shown
@@ -101,9 +101,9 @@ Alright so we have all together - within Apache we use the proxy modules to achi
 
 Further also this configuration can be applied and easily to a docker container, which is the perfect segway to the tool / script I wrote as a learning experience.
 
-## NoPhis - the tool / setup
+## NoPhish - the tool / setup
 
-So combining all the things together - I present you [NoPhis](https://github.com/powerseb/NoPhish.git). Basically, it is a complete phishing setup based on docker which uses `noVNC`.
+So combining all the things together - I present you [NoPhish](https://github.com/powerseb/NoPhish.git). Basically, it is a complete phishing setup based on docker which uses `noVNC`.
 
 ![All comes together now](together.jpg)
 
@@ -118,7 +118,7 @@ So that is the rough overview of the setup and mechanisms - now a short overview
 To setup the tool the following basic requirements need to be fulfilled:
 
 - Docker needs to be installed
-- the python modules sqlite3, lz4 and json are required for the cookie export
+- the python modules lz4 and json are required for the cookie export
 
 When those requirements are given clone the [repo](https://github.com/powerseb/NoPhish) and run the `setup.sh`:
 
@@ -181,7 +181,7 @@ http://hello.local/695ad1ff254ee7806b06835d6b3d/conn.html?path=/695ad1ff254ee780
 ```
 
 
-The displayed Phishing URLs contain some random strings (in this example f325a55604e4d31f5a469d591e2c) - this should provide some randomness to the URL (to lure the user), hide the VNC connections from scanners and randomize the VNC password.
+The displayed Phishing URLs contain some random strings (in this example f325a55604e4d31f5a469d591e2c) - this should provide some randomness to the URL (to lure the user), hide the vnc connections from scanners and randomize the vnc password.
 
 Next the script will start it's loop to gather cookies and session cookies. To not dive here into too much details (because this was the part of this whole endeavor which drove me near madness) - the loop contains the following steps:
 
