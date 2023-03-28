@@ -10,6 +10,10 @@ img_path: /assets/img/2023-03-22/
 
 In this article I would like to introduce you to a tool / template I created, which can be used to phish credentials and even handle MFA. This work is heavily based on the initial article of [mrd0x](https://mrd0x.com/bypass-2fa-using-novnc/).
 
+## TL;DR
+
+New Phishing tool based on noVNC, scalable, with a reverse proxy and docker based - [NoPhish](https://github.com/powerseb/NoPhish.git). Perfect for Adversary in the Middle (AITM) attacks.
+
 ## Basic Concept
 
 So, we all know and love phishing. From my experience there are two kinds of phishing attacks:
@@ -27,7 +31,7 @@ Because it is the real website and the user performs a real logon to it, the `Mu
 
 Ultimately this provides an attacker with multiple possible further attacks - e.g., export of the session cookies and logon with those, extraction of data by use of a keylogger on the noVNC machine, manipulation of the network traffic to prevent a logout and then takeover the session ... etc.
 
-With this concept established let's see what a noob as I can add to that. The basic concept is easy to understand but, if I wanted to setup such a phishing infrastructure, I was confronted with a lot of questions. So started my adventure to build an  `easy` setup, which works out-of-the-box (like `Evilgnix`). As a result I prepared a tool / template, which should help others to easily setup a scalable `noVNC` based phishing infrastructure and can easily be used in real world scenarios - so let's start.
+With this concept established let's see what a noob as I can add to that. The basic concept is easy to understand but, if I wanted to setup such a phishing infrastructure, I was confronted with a lot of questions. So started my adventure to build an  `easy` setup, which works out-of-the-box (like the great [Evilginx](https://github.com/kgretzky/evilginx2)). As a result I prepared a tool / template, which should help others to easily setup a scalable `noVNC` based phishing infrastructure and can easily be used in real world scenarios - so let's start.
 
 ![Make it easy!](easy.jpg)
 
@@ -206,4 +210,4 @@ During the execution if you hit `ctrl` + `c` the script will stop and remove all
 
 ## Conclusion
 
-I hope I could provide you some insight into this phishing setup, provide more understanding how to use noVNC within a phishing campaign. Please feel free to let me know if the tool / setup helped you in any way, what could be done better and @my-future-self I hope you remembered again how your own tool works.
+I hope I could provide you some insight into this phishing setup, provide more understanding how to use noVNC within a phishing campaign. Please feel free to let me know if the tool / setup ([NoPhish](https://github.com/powerseb/NoPhish)) helped you in any way, what could be done better and @my-future-self I hope you remembered again how your own tool works.
