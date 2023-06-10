@@ -198,7 +198,7 @@ MSV entries a little special structure - as you may already noticed they also di
 
 So when we parse the MSV entry according to the selected template we are able to extract the encrypted credentials. 
 
-%BILD%
+![Encrypted credentials](enc.jpg)
 
 #### Hash extraction
 
