@@ -236,6 +236,6 @@ _Me after the post_
 
 ## References
 
-[Logon Process](https://learn.microsoft.com/en-us/windows-server/security/windows-authentication/credentials-processes-in-windows-authentication)
-[Minidump documentation](https://learn.microsoft.com/en-us/windows/win32/api/minidumpapiset/ne-minidumpapiset-minidump_stream_type)
-[MSV authentication package](https://learn.microsoft.com/en-us/windows/win32/secauthn/msv1-0-authentication-package)
+- [Logon Process](https://learn.microsoft.com/en-us/windows-server/security/windows-authentication/credentials-processes-in-windows-authentication)
+- [Minidump documentation](https://learn.microsoft.com/en-us/windows/win32/api/minidumpapiset/ne-minidumpapiset-minidump_stream_type)
+- [MSV authentication package](https://learn.microsoft.com/en-us/windows/win32/secauthn/msv1-0-authentication-package)
